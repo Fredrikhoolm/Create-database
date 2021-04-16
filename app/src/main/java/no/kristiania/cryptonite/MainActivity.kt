@@ -1,5 +1,6 @@
 package no.kristiania.cryptonite
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
@@ -9,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import java.io.IOException
 
+/*
 private fun generateCryptoList(size: Int): List<Crypto_list> {
     val list = ArrayList<Crypto_list>()
     for (i in 0 until size) {
@@ -23,6 +25,7 @@ private fun generateCryptoList(size: Int): List<Crypto_list> {
 
     return list
 }
+*/
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +33,17 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Cryptonite)
         setContentView(R.layout.activity_main)
 
+       // recycler_view.setBackgroundColor(Color.BLUE)
+
+        recycler_view.layoutManager = LinearLayoutManager(this)
+//        recycler_view.adapter = MainAdapter()
+
         fetchJson()
 
-        val cryptoList = generateCryptoList(500)
+       /* val cryptoList = generateCryptoList(500)
         recycler_view.adapter = ListAdapter(cryptoList)
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.setHasFixedSize(true)
+        recycler_view.setHasFixedSize(true)*/
     }
 
     fun fetchJson() {
@@ -55,6 +63,10 @@ class MainActivity : AppCompatActivity() {
                 val gson = GsonBuilder().create()
 
                 val crypto = gson.fromJson(body, Crypto::class.java)
+
+                runOnUiThread{
+                    recycler_view.adapter = MainAdapter(crypto)
+                }
             }
 
             override fun onFailure(call: Call, e: IOException) {
