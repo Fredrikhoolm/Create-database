@@ -25,6 +25,10 @@ class MainAdapter(val crypto: Crypto): RecyclerView.Adapter<CustomViewHolder>() 
         holder?.view?.textView_crypto_title?.text = data.name
 
         holder?.view?.textView_symbol?.text = data.symbol
+
+        holder?.view?.textView_crypto_price?.text = data.priceUsd.toString()
+
+        holder?.view?.textView_crypto_percentage.text = data.changePercent24Hr
     }
 
 }
