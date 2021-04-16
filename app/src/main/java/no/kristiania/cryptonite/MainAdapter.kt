@@ -30,9 +30,9 @@ class MainAdapter(val crypto: Crypto): RecyclerView.Adapter<CustomViewHolder>() 
 
         holder?.view?.textView_symbol?.text = data.symbol
 
-        holder?.view?.textView_crypto_price?.text = data.priceUsd.toString()
+        holder?.view?.textView_crypto_price?.text = String.format("%.2f", data.priceUsd)
 
-        holder?.view?.textView_crypto_percentage.text = data.changePercent24Hr
+        holder?.view?.textView_crypto_percentage.text = String.format("%.2f", data.changePercent24Hr) + "%"
 
         val icon = holder?.view?.imageView
 
