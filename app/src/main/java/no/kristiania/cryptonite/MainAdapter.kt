@@ -1,5 +1,6 @@
 package no.kristiania.cryptonite
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,16 @@ class MainAdapter(val crypto: Crypto): RecyclerView.Adapter<CustomViewHolder>() 
 }
 
     class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+
+        init{
+            view.setOnClickListener {
+                println("Test")
+
+                val intent = Intent(view.context, Crypto_Detail::class.java)
+
+                view.context.startActivity(intent)
+            }
+        }
 
 }
 
